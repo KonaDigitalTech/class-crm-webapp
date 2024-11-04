@@ -1,10 +1,10 @@
-'use client'
-import { Provider } from 'react-redux'
-import { makeStore } from '@/lib/store'
-import { ToastContainer } from 'react-toastify'
-import localFont from "next/font/local"
-import "./globals.css"
-import 'react-toastify/dist/ReactToastify.css'
+"use client";
+import { Provider } from "react-redux";
+import { makeStore } from "@/lib/store";
+import { ToastContainer } from "react-toastify";
+import localFont from "next/font/local";
+import "./globals.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -19,20 +19,32 @@ const geistMono = localFont({
 });
 
 // Create store instance outside component
-const store = makeStore()
+const store = makeStore();
 
 // Create StoreProvider component
 function StoreProvider({ children }) {
-  return <Provider store={store}>{children}</Provider>
+  return <Provider store={store}>{children}</Provider>;
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <StoreProvider>
           {children}
-          <ToastContainer/>
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
         </StoreProvider>
       </body>
     </html>

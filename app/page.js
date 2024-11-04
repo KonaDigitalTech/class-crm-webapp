@@ -42,16 +42,18 @@ export default function Page() {
       if (validate()) {
           dispatch(authLogin(loginData))
               .unwrap()
-              .then((res) => {
-                  if (res?.status === 200) {
+              .then((res) => {                
+                  if (res) {
                       toast.success(res?.message || "Login Successful");
+                      console.log(res);
                       router.push('/leads'); // Ensure this line is reached
-                  } else {
+                    } else {
+                    console.log(res);
                       toast.error("Unexpected response status");
                   }
               })
               .catch((err) => {
-                  toast.error(err?.message || "Something went wrong");
+                  toast.error(err?.error || "Something went wrong");
               });
       }
   };
